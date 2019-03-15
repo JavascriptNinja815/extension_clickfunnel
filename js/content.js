@@ -17,13 +17,15 @@ function isActiveTab() {
 function start() {
 
   // if (document.location.href.indexOf("https://app.clickfunnels.com/users/sign_in") > -1) {
-  if (document.location.href.indexOf("https://affiliates.clickfunnels.com/affiliate") > -1) {
+  if (document.location.href.indexOf("https://affiliates.clickfunnels.com/users/sign_in") > -1) {
+    console.log('if');
     alert("Please login to ClickFunnels");
     console.warn("Please login to ClickFunnels")
     clearInterval(_timer);
     _MessageHelper.toBackground.closeTab(_tabId);
   }
   else {
+    console.log('if');
     // Click Download
     $("a.export-link[data-popup-title='Download CSV']")[0].click();
 
@@ -62,7 +64,8 @@ function start() {
                           if (affiliatesReadResponse) {
 
                             // Get Affiliates from ClickFunnels (sheet2)
-                            getAllReferredAffiliates([], "https://app.clickfunnels.com/login_as_cf_affiliate", function (affiliates) {
+                            // getAllReferredAffiliates([], "https://app.clickfunnels.com/login_as_cf_affiliate", function (affiliates) {
+                            getAllReferredAffiliates([], "https://affiliates.clickfunnels.com/affiliate-access", function (affiliates) {
 
                               if (affiliates) {
 
@@ -197,7 +200,8 @@ function parseReferredAffiliates(html) {
 
   var data = {
     affiliates: [],
-    nextPageUrl: nextPage.length > 0 ? "https://app.clickfunnels.com/" + nextPage.attr("href") : false
+    // nextPageUrl: nextPage.length > 0 ? "https://app.clickfunnels.com/" + nextPage.attr("href") : false
+    nextPageUrl: nextPage.length > 0 ? "https://affiliates.clickfunnels.com" + nextPage.attr("href") : false
   }
 
   for (var i = 0; i < affRows.length; i++) {
