@@ -1,5 +1,5 @@
-﻿/// <reference path="MessageHelper.js" />
-/// <reference path="Settings.js" />
+﻿//// <reference path="MessageHelper.js" />
+//// <reference path="Settings.js" />
 var _db = new Settings(function () { $(document).ready(INIT); });
 
 var _tabId = 0;
@@ -16,8 +16,7 @@ function isActiveTab() {
 
 function start() {
 
-  // if (document.location.href.indexOf("https://app.clickfunnels.com/users/sign_in") > -1) {
-  if (document.location.href.indexOf("https://affiliates.clickfunnels.com/users/sign_in") > -1) {
+  if (document.location.href.indexOf("https://app.clickfunnels.com/users/sign_in") > -1) {
     alert("Please login to ClickFunnels");
     console.warn("Please login to ClickFunnels")
     clearInterval(_timer);
@@ -40,9 +39,9 @@ function start() {
 
             // Get GoogleSheet Token
             _MessageHelper.toBackground.getAuthToken(function (token) {
-
+              console.log('called token');
               if (token) {
-
+                console.log('token exist');
                 // Get Commissions from GoogleSheet (sheet1)
                 _MessageHelper.toBackground.readGoogleSheet(_db.settings.googleSheetId, _db.settings.sheet1Name, token, function (commissionsReadResponse) {
 
@@ -62,8 +61,7 @@ function start() {
                           if (affiliatesReadResponse) {
 
                             // Get Affiliates from ClickFunnels (sheet2)
-                            // getAllReferredAffiliates([], "https://app.clickfunnels.com/login_as_cf_affiliate", function (affiliates) {
-                            getAllReferredAffiliates([], "https://affiliates.clickfunnels.com/affiliate-access", function (affiliates) {
+                            getAllReferredAffiliates([], "https://app.clickfunnels.com/login_as_cf_affiliate", function (affiliates) {
 
                               if (affiliates) {
 
@@ -198,8 +196,7 @@ function parseReferredAffiliates(html) {
 
   var data = {
     affiliates: [],
-    // nextPageUrl: nextPage.length > 0 ? "https://app.clickfunnels.com/" + nextPage.attr("href") : false
-    nextPageUrl: nextPage.length > 0 ? "https://affiliates.clickfunnels.com" + nextPage.attr("href") : false
+    nextPageUrl: nextPage.length > 0 ? "https://app.clickfunnels.com/" + nextPage.attr("href") : false
   }
 
   for (var i = 0; i < affRows.length; i++) {

@@ -1,33 +1,32 @@
 {
-  "update_url": "https://clients2.google.com/service/update2/crx",
+"update_url": "https://clients2.google.com/service/update2/crx",
+
   "manifest_version": 2,
   "name": "Buildapreneur CF Affiliate Grabber",
   "description": "Check the status of ClickFunnels affiliate sales and capture the information into a Google Sheet",
   "version": "1.0.5.2",
   "browser_action": {
-    "default_icon": "icons/icon128.png"
+    "default_icon": "icons/icon.png"
   },
-  "permissions": [
-    "tabs",
-    "storage",
-    "identity"
-  ],
+  "permissions": [ "tabs", "storage", "identity" ],
+
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
   },
+
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
   },
+
   "oauth2": {
-    "client_id": "435173534301-qj93g9e6rrek3096s6uqrqindlu7a0d1.apps.googleusercontent.com",
-    "scopes": [
-      "https://www.googleapis.com/auth/spreadsheets"
-    ]
+    "client_id": "298805596445-9b5imhlnoc83iuq8g17ft259arck8l32.apps.googleusercontent.com",
+    "scopes": [ "https://www.googleapis.com/auth/spreadsheets" ]
   },
   "background": {
+
     "scripts": [
       "js/libs/jquery.min.js",
       "js/Settings.js",
@@ -36,11 +35,10 @@
       "js/background.js"
     ]
   },
+
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
+      "matches": [ "<all_urls>" ],
       "js": [
         "js/libs/jquery.min.js",
         "js/libs/jquery.csv.js",

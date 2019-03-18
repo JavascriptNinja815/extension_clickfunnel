@@ -1,131 +1,115 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
-  <title>Options</title>
-  <style>
-    body {
-      padding: 5px;
-    }
+    <title>Options</title>
+    <style>
+        body {
+            padding: 5px;
+        }
 
-    h2 {
-      padding: 0;
-      margin: 0;
-      margin-bottom: 15px;
-      font-weight: bold;
-      display: block;
+        h2 {
+            padding:0;
+            margin:0;
+            margin-bottom: 15px;
+            font-weight:bold;
+            display:block;
+            
+        }
 
-    }
+        ul.options {
+            list-style: none;
+            margin:0;
+            padding:0;
+        }
 
-    ul.options {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+        ul.options li {
+            margin:0;
+            padding:0;
+            display:block;
+            margin-bottom: 10px;
+        }
 
-    ul.options li {
-      margin: 0;
-      padding: 0;
-      display: block;
-      margin-bottom: 10px;
-    }
+            ul.options li.footer {
+                display: block;
+                margin-top: 25px;
+                padding-top: 15px;
+                border-top: dashed 1px #CCC;
+                height: 30px;
+                margin-bottom: 0;
+                text-align: right;
+            }
 
-    ul.options li.footer {
-      display: block;
-      margin-top: 25px;
-      padding-top: 15px;
-      border-top: dashed 1px #CCC;
-      height: 30px;
-      margin-bottom: 0;
-      text-align: right;
-    }
+        #status {
+            display:inline-block;
+            float:left;
+            font-size:12px;
+            color:green;
+        }
 
-    #status {
-      display: inline-block;
-      float: left;
-      font-size: 12px;
-      color: green;
-    }
+        .full-width {
+            width: 100%;display: block;
+        }
 
-    .full-width {
-      width: 100%;
-      display: block;
-    }
-  </style>
+    </style>
 
-  <script type="text/javascript" src="/js/libs/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/Settings.js"></script>
-  <script src="js/MessageHelper.js"></script>
-  <script type="text/javascript" src="/js/options.js"></script>
+    <script type="text/javascript" src="/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/Settings.js"></script>
+    <script src="js/MessageHelper.js"></script>
+    <script type="text/javascript" src="/js/options.js"></script>
 
 </head>
 
 <body>
-  <h2>Settings:</h2>
+    <h2>Settings:</h2>    
 
-  <ul class="options">
+        <ul class="options">
 
-    <li>
-      <label for="txtGoogleSheetId">
-        Active:
-        <input type="checkbox" id="chkIsActive" />
-      </label>
-    </li>
+            <li>
+                <label for="txtGoogleSheetId">
+                    Active:
+                    <input type="checkbox" id="chkIsActive" />
+                </label>
+            </li>
 
-    <li>
-      <label for="txtCheckDelayMins">
-        Check Every "X" minutes (Please close browser after changing this setting):
-        <input type="number" id="txtCheckDelayMins" class="full-width" required min="5" />
-      </label>
-    </li>
+            <li>
+                <label for="txtCheckDelayMins">
+                    Check Every "X" minutes (Please close browser after changing this setting):
+                    <input type="number" id="txtCheckDelayMins" class="full-width" required min="5" />
+                </label>
+            </li>
 
-    <li>
-      <label for="first" style="color: red;"> First# </label><br>
-      First Page URL
-      <input type="text" id="firstPageURL" class="full-width" value="https://affiliates.clickfunnels.com/affiliate" required />
-      First Sheet ID or URL
-      <input type="text" id="txtGoogleSheetId" class="full-width" value="https://docs.google.com/spreadsheets/d/1acuBqWrO9Wbbo5i3yMCBLpY9zsE4_Qo1OhPRAvdW1zI/edit#gid=0" required />
-    </li>
-    <!-- <li>
-      <label for="second" style="color: red;"> Second# </label><br>
-      Second Page URL
-      <input type="text" id="secondPageURL" class="full-width" value="https://thehealthblueprint.clickfunnels.com/affiliate" required />
-      Second Sheet ID or URL
-      <input type="text" id="secondSheetURL" class="full-width" value="https://docs.google.com/spreadsheets/d/18QM91fXLYgV8t0x-k4nsCpjt1VL5E5ne6bCWtY2xI0g/edit#gid=0" required />
-    </li> -->
-    <!-- <li>
-      <label for="txtGoogleSheetId">
-        Google Sheet ID or URL:
-        <input type="text" id="txtGoogleSheetId" class="full-width" required />
-      </label>
-    </li> -->
+            <li>
+                <label for="txtGoogleSheetId">
+                    Google Sheet ID or URL:
+                    <input type="text" id="txtGoogleSheetId" class="full-width" required />
+                </label>
+            </li>
 
-    <li>
-      <label>
-        Last Complete:
-        <span id="txtLastCompletedTime" />
-      </label>
-    </li>
+            <li>
+                <label>
+                    Last Complete:
+                    <span id="txtLastCompletedTime" />
+                </label>
+            </li>
 
-    <li>
-      <label>
-        <a href="#" id="checkNow">Check Now</a>
-      </label>
-    </li>
-    <li>
-      <label for="txtGoogleSheetId" title="(For CF Follow Up Pro Only)">
-        Do Not Remove Duplicates:
-        <input type="checkbox" id="txtGoogleSheetAllData" />
-      </label>
-    </li>
+            <li>
+                <label>
+                    <a href="#" id="checkNow">Check Now</a>
+                </label>
+            </li>
+            <li>
+                <label for="txtGoogleSheetId" title="(For CF Follow Up Pro Only)" >
+                    Do Not Remove Duplicates:
+                    <input type="checkbox" id="txtGoogleSheetAllData" />
+                </label>
+            </li>
 
 
-    <li class="footer">
-      <div id="status"></div> <input type="submit" id="save" value="Save" />
-    </li>
+            <li class="footer">
+                <div id="status"></div> <input type="submit" id="save" value="Save" />
+            </li>
 
-  </ul>
-
+        </ul>
+  
 </body>
-
 </html>
