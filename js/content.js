@@ -18,14 +18,12 @@ function start() {
 
   // if (document.location.href.indexOf("https://app.clickfunnels.com/users/sign_in") > -1) {
   if (document.location.href.indexOf("https://affiliates.clickfunnels.com/users/sign_in") > -1) {
-    console.log('if');
     alert("Please login to ClickFunnels");
     console.warn("Please login to ClickFunnels")
     clearInterval(_timer);
     _MessageHelper.toBackground.closeTab(_tabId);
   }
   else {
-    console.log('if');
     // Click Download
     $("a.export-link[data-popup-title='Download CSV']")[0].click();
 
