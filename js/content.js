@@ -63,7 +63,7 @@ function start() {
 
                             // Get Affiliates from ClickFunnels (sheet2)
                             // getAllReferredAffiliates([], "https://app.clickfunnels.com/login_as_cf_affiliate", function (affiliates) {
-                              getAllReferredAffiliates([], "https://affiliates.clickfunnels.com/login_as_cf_affiliate", function (affiliates) {
+                              getAllReferredAffiliates([], "https://affiliates.clickfunnels.com/affiliate-access", function (affiliates) {
 
                               if (affiliates) {
 

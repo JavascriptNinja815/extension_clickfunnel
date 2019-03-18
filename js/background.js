@@ -15,7 +15,7 @@ function INIT() {
 function openClickFunnels() {
 
     // chrome.tabs.create({ url: "https://app.clickfunnels.com/login_as_cf_affiliate", active: false }, function (tab) {
-    chrome.tabs.create({ url: "https://affiliates.clickfunnels.com/login_as_cf_affiliate", active: false }, function (tab) {
+    chrome.tabs.create({ url: "https://affiliates.clickfunnels.com/affilate-access", active: false }, function (tab) {
         _db.settings.clickfunnelsTabId = tab.id;
         _db.save();
     });
