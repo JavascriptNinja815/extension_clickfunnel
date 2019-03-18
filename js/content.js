@@ -247,10 +247,6 @@ function distinctArrays(isComishCheck, array1, array2, checkColumnsArray) {
     var matched = false;
     var matchedColumnCount = 0;
 
-    //np add code her
-    // If the comission check and only the request is to get all data
-    console.warn("ALL SETINGS")
-    console.warn(_db.settings.allData == true)
     if (isComishCheck && _db.settings.allData) {
       //Loop through spreadsheet
       checkColumnsArray = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -259,30 +255,14 @@ function distinctArrays(isComishCheck, array1, array2, checkColumnsArray) {
         //Load spreadsheet row
         var gs = array2[x];
         var matchedColumnCount = 0;
-        //              showError("data "+cf[5] +"||")
-        //              showError(cf[5]==null);
-        //              showError(cf[5].length);
-        //              showError("data1 "+gs[5] +"||")
-        //              showError(gs[5]==null);
-        //              showError(gs[5].length);
-        //              if(cf[5].length==0 && gs[5].length==1 && gs[5]=="-")
-        //              {showError("Bark")}
-
         for (var y = 0; y < checkColumnsArray.length; y++) {
           //Check for matches
-          //for (var y = 0; y < 1; y++) {
-          //showError("data "+cf[checkColumnsArray[y]] +"||" + gs[checkColumnsArray[y]] +"||"+checkColumnsArray.length)
           if (cf[checkColumnsArray[y]] == gs[checkColumnsArray[y]] || isBlankMatch(cf[checkColumnsArray[y]], gs[checkColumnsArray[y]])) {
-
             matchedColumnCount++;
-            //showError("data matched "+matchedColumnCount +"||" + gs[checkColumnsArray[y]]);
-            //    matched = true;
           }
         }
         //Check all columns to see if it is new
-
         matched = matchedColumnCount >= checkColumnsArray.length;
-        //  showError("data3 "+matchedColumnCount +" --" + checkColumnsArray.length +" --" +matched.valueOf())
         if (matched) break;
       }
     }
@@ -294,7 +274,6 @@ function distinctArrays(isComishCheck, array1, array2, checkColumnsArray) {
         var gs = array2[x];
         var matchedColumnCount = 0;
 
-        //for (var y = 0; y < checkColumnsArray.length; y++) {
         for (var y = 0; y < 1; y++) {
           if (cf[checkColumnsArray[y]] == gs[checkColumnsArray[y]]) {
             matchedColumnCount++;

@@ -45,7 +45,7 @@
         },
 
         checkClickFunnels: function () {
-            chrome.runtime.sendMessage({ to: 'background', action: 'checkClickFunnels' });
+            chrome.runtime.sendMessage({ to: 'background', action: 'checkClickFunnels', url: url });
         }
 
     }
