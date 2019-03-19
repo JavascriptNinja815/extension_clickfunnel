@@ -1,20 +1,21 @@
 ﻿// <reference path="MessageHelper.js" />
 // <reference path="Settings.js" />
 var _db = new Settings(function () { $(document).ready(INIT); });
-
 var _tabId = 0;
 
-function getId(clickfunnel) {
+function getId(clickfunnel, _tabId) {
+  var id = "";
   var key = Object.keys(clickfunnel);
   key.forEach(function (key) {
-    if (clickfunnel[key].tabId == _tabId) return key;
-  })
+    if (clickfunnel[key].tabId == _tabId) id = key;
+  });
+  return id;
 }
 
 function INIT() {
   _MessageHelper.toBackground.getTabId(function (tabId) {
     _tabId = tabId;
-    var id = getId(_db.settings.clickfunnel);
+    var id = getId(_db.settings.clickfunnel, _tabId);
     if (isActiveTab(id)) start(id);  
   });
 
@@ -49,9 +50,7 @@ function start(id) {
 
             // Get GoogleSheet Token
             _MessageHelper.toBackground.getAuthToken(function (token) {
-              console.log('called token');
               if (token) {
-                console.log('token exist');
                 // Get Commissions from GoogleSheet (sheet1)
                 _MessageHelper.toBackground.readGoogleSheet(_db.settings.clickfunnel[id].sheetId, _db.settings.sheet1Name, token, function (commissionsReadResponse) {
 
