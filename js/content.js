@@ -3,7 +3,6 @@
 var _db = new Settings(function () { $(document).ready(INIT); });
 
 var _tabId = 0;
-_MessageHelper.toBackground.getTabId(function (tabId) { _tabId = tabId; });
 
 function getId(clickfunnel) {
   var key = Object.keys(clickfunnel);
@@ -12,11 +11,13 @@ function getId(clickfunnel) {
   })
 }
 
-
 function INIT() {
-  var id = getId(_db.settings.clickfunnel);
-  console.log(id);
-  if (isActiveTab(id)) start(id);
+  _MessageHelper.toBackground.getTabId(function (tabId) {
+    _tabId = tabId;
+    var id = getId(_db.settings.clickfunnel);
+    if (isActiveTab(id)) start(id);  
+  });
+
 }
 
 function isActiveTab(id) {
