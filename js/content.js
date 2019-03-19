@@ -5,19 +5,26 @@ var _db = new Settings(function () { $(document).ready(INIT); });
 var _tabId = 0;
 _MessageHelper.toBackground.getTabId(function (tabId) { _tabId = tabId; });
 
+function getId(clickfunnel) {
+  var key = Object.keys(clickfunnel);
+  key.forEach(function (key) {
+    if (clickfunnel[key].tabId == _tabId) return id;
+  })
+}
+
+
 function INIT() {
-
-  if (isActiveTab()) start();
+  var id = getId(_db.settings.clickfunnel);
+  if (isActiveTab(id)) start(id);
 }
 
-function isActiveTab() {
-  return _db.settings.clickfunnelsTabId == _tabId && _db.settings.googleSheetId.length > 15 && _db.settings.sheet1Name.length > 0 && _db.settings.sheet2Name.length > 0;
+function isActiveTab(id) {
+  return _db.settings.clickfunnel[id].tabId == _tabId && _db.settings.clickfunnel[id].sheetId.length > 15 && _db.settings.sheet1Name.length > 0 && _db.settings.sheet2Name.length > 0;
 }
 
-function start() {
+function start(id) {
 
-  // if (document.location.href.indexOf("https://app.clickfunnels.com/users/sign_in") > -1) {
-    if (document.location.href.indexOf("https://affiliates.clickfunnels.com/users/sign_in") > -1) {
+  if (document.location.href.indexOf("/users/sign_in") > -1) {
     alert("Please login to ClickFunnels");
     console.warn("Please login to ClickFunnels")
     clearInterval(_timer);
@@ -44,33 +51,32 @@ function start() {
               if (token) {
                 console.log('token exist');
                 // Get Commissions from GoogleSheet (sheet1)
-                _MessageHelper.toBackground.readGoogleSheet(_db.settings.googleSheetId, _db.settings.sheet1Name, token, function (commissionsReadResponse) {
+                _MessageHelper.toBackground.readGoogleSheet(_db.settings.clickfunnel[id].sheetId, _db.settings.sheet1Name, token, function (commissionsReadResponse) {
 
                   if (commissionsReadResponse) {
 
                     var uniqueCommissions = distinctArrays(true, commissionsArray, commissionsReadResponse.values || [], [1, 8]);
 
                     // Append commisions to GoogleSheet
-                    _MessageHelper.toBackground.appendToGoogleSheet(_db.settings.googleSheetId, _db.settings.sheet1Name, token, uniqueCommissions, function (commissionsAppendResponse) {
+                    _MessageHelper.toBackground.appendToGoogleSheet(_db.settings.clickfunnel[id].sheetId, _db.settings.sheet1Name, token, uniqueCommissions, function (commissionsAppendResponse) {
 
 
                       if (commissionsAppendResponse) {
 
                         // Get Affiliates from GoogleSheet (sheet2)
-                        _MessageHelper.toBackground.readGoogleSheet(_db.settings.googleSheetId, _db.settings.sheet2Name, token, function (affiliatesReadResponse) {
+                        _MessageHelper.toBackground.readGoogleSheet(_db.settings.clickfunnel[id].sheetId, _db.settings.sheet2Name, token, function (affiliatesReadResponse) {
 
                           if (affiliatesReadResponse) {
 
                             // Get Affiliates from ClickFunnels (sheet2)
-                            // getAllReferredAffiliates([], "https://app.clickfunnels.com/login_as_cf_affiliate", function (affiliates) {
-                              getAllReferredAffiliates([], "https://affiliates.clickfunnels.com/affiliate-access", function (affiliates) {
+                            getAllReferredAffiliates([], _db.settings.clickfunnel[id].url, function (affiliates) {
 
                               if (affiliates) {
 
                                 var unuqieAffiliates = distinctArrays(false, affiliates, affiliatesReadResponse.values || [], [1, 2]);
 
                                 // Append Affiliates to GoogleSheet
-                                _MessageHelper.toBackground.appendToGoogleSheet(_db.settings.googleSheetId, _db.settings.sheet2Name, token, unuqieAffiliates, function (affiliatesAppendResponse) {
+                                _MessageHelper.toBackground.appendToGoogleSheet(_db.settings.clickfunnel[id].sheetId, _db.settings.sheet2Name, token, unuqieAffiliates, function (affiliatesAppendResponse) {
 
                                   if (affiliatesAppendResponse) {
 
@@ -81,7 +87,7 @@ function start() {
                                     _db.save();
 
                                     // Close Tab
-                                    _MessageHelper.toBackground.closeTab(_db.settings.clickfunnelsTabId);
+                                    _MessageHelper.toBackground.closeTab(_db.settings.clickfunnel[id].tabid);
 
                                   } else showError("Couldn't append Affiliates to GoogleSheet");
 
@@ -204,7 +210,7 @@ function parseReferredAffiliates(html) {
     affiliates: [],
     nextPageUrl: nextPage.length > 0 ? "https://affiliates.clickfunnels.com/" + nextPage.attr("href") : false
   }
-  
+
   for (var i = 0; i < affRows.length; i++) {
 
     var affTds = $(affRows[i]).find("td");
