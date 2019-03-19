@@ -8,13 +8,14 @@ _MessageHelper.toBackground.getTabId(function (tabId) { _tabId = tabId; });
 function getId(clickfunnel) {
   var key = Object.keys(clickfunnel);
   key.forEach(function (key) {
-    if (clickfunnel[key].tabId == _tabId) return id;
+    if (clickfunnel[key].tabId == _tabId) return key;
   })
 }
 
 
 function INIT() {
   var id = getId(_db.settings.clickfunnel);
+  console.log(id);
   if (isActiveTab(id)) start(id);
 }
 
