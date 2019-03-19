@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, response) {
     }
 
     else if (action == "checkClickFunnels") {
-      checkClickFunnels(request.url);
+      checkClickFunnels(request.id, request.url, request.sheetId);
     }
   }
 
@@ -201,12 +201,11 @@ function googleSheetsAjax(url, data, isPost, callBack) {
 }
 
 // checkClickFunnels
-function checkClickFunnels(url) {
-
-  // chrome.tabs.create({ url: "https://app.clickfunnels.com/login_as_cf_affiliate", active: false }, function (tab) {
+function checkClickFunnels(id, url, sheetId) {
   chrome.tabs.create({ url: url, active: false }, function (tab) {
-
-    _db.settings.clickfunnelsTabId = tab.id;
+    _db.settings.clickfunnel[id].url = url;
+    _db.settings.clickfunnel[id].sheetId = sheetId;
+    _db.settings.clickfunnel[id].tabId = tab.id;
     _db.save();
   });
 }

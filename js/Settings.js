@@ -3,12 +3,10 @@
   var _root = this;
 
   _root.settings = {
-    firstUrl: "",
-    firstSheetId: "",
-    secondUrl: "",
-    secondSheetId: "",
-    firstTabId: 0,
-    secondTabId: 0,
+    clickfunnel: {
+      first: { url: "", sheetId: "", tabId: 0 },
+      second: { url: "", sheetId: "", tabId: 0 }
+    },
     sheet1Name: "Sheet1",
     sheet2Name: "Sheet2",
     maxCsvLinkWaitTime: 60 * 2 * 1000,
@@ -24,14 +22,10 @@
     chrome.storage.local.get("settings", function (result) {
 
       if (result && result.settings) {
-        _root.settings.firstUrl = result.settings.firstUrl || "";
-        _root.settings.firstSheetId = result.settings.firstSheetId || "";
-
-        _root.settings.secondUrl = result.settings.secondUrl || "";
-        _root.settings.secondSheetId = result.settings.secondSheetId || "";
-
-        _root.settings.firstTabId = result.settings.firstTabId || 0;
-        _root.settings.secondTabId = result.settings.secondTabId || 0;
+        var id = Object.keys(result.settings.clickfunnel);
+        id.forEach(function (id) {
+          _root.settings.clickfunnel[id] = result.settings.clickfunnel[id];
+        });
 
         _root.settings.sheet1Name = result.settings.sheet1Name || "Sheet1";
         _root.settings.sheet2Name = result.settings.sheet2Name || "Sheet2";

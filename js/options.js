@@ -23,26 +23,28 @@ function INIT() {
   });
   // click first check button
   $("#checkNowFirst").on("click", function () {
-    saveOptions("first");
+    // saveOptions();
     var url = $("#firstUrl").val();
-    _MessageHelper.toBackground.checkClickFunnels(url);
+    var sheetId = $("#firstSheet").val();
+    _MessageHelper.toBackground.checkClickFunnels('first', url, sheetId);
   });
   // click second check button
   $("#checkNowSecond").on("click", function () {
-    saveOptions("second");
+    // saveOptions();
     var url = $("#secondUrl").val();
-    _MessageHelper.toBackground.checkClickFunnels(url);
+    var sheetId = $("#secondSheet").val();
+    _MessageHelper.toBackground.checkClickFunnels('second', url, sheetId);
   });
 };
 
 // SET input values
 function setOptions() {
 
-  $("#firstUrl").val(_db.settings.firstUrl);
-  $("#firstSheet").val(_db.settings.firstSheetId);
+  $("#firstUrl").val(_db.settings.clickfunnel['first'].url);
+  $("#firstSheet").val(_db.settings.clickfunnel['first'].sheetId);
 
-  $("#secondUrl").val(_db.settings.secondUrl);
-  $("#secondSheet").val(_db.settings.secondSheetId);
+  $("#secondUrl").val(_db.settings.clickfunnel['second'].url);
+  $("#secondSheet").val(_db.settings.clickfunnel['second'].sheetId);
 
   $("#chkIsActive").prop("checked", _db.settings.isActive);
   $("#txtCheckDelayMins").val(_db.settings.checkDelayMins);
@@ -52,16 +54,12 @@ function setOptions() {
 }
 
 // SAVE input values
-function saveOptions(id) {
-  switch (id) {
-    case "first":
-      _db.settings.firstUrl = $("#firstUrl").val().trim();
-      _db.settings.firstSheetId = $("#firstSheet").val().trim();
-      break;
-    case "second":
-      _db.settings.secondUrl = $("#secondUrl").val().trim();
-      _db.settings.secondSheetId = $("#secondSheet").val().trim();
-  }
+function saveOptions() {
+  _db.settings.clickfunnel['first'].url = $("#firstUrl").val().trim();
+  _db.settings.clickfunnel['first'].sheetId = $("#firstSheet").val().trim();
+  _db.settings.clickfunnel['second'].url = $("#secondUrl").val().trim();
+  _db.settings.clickfunnel['second'].sheetId = $("#secondSheet").val().trim();
+
   _db.settings.isActive = $("#chkIsActive").is(":checked");
 
   _db.settings.checkDelayMins = parseInt($("#txtCheckDelayMins").val());

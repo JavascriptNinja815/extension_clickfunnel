@@ -44,8 +44,8 @@
             chrome.runtime.sendMessage({ to: 'background', action: 'closeTab', tabId: tabId });
         },
 
-        checkClickFunnels: function () {
-            chrome.runtime.sendMessage({ to: 'background', action: 'checkClickFunnels', url: url });
+        checkClickFunnels: function (id, url, sheetId) {
+            chrome.runtime.sendMessage({ to: 'background', action: 'checkClickFunnels', id: id, url:url, sheetId: sheetId});
         }
 
     }
